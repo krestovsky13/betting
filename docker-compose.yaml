@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+  rabbitmq:
+    image: rabbitmq:3.10.7-management
+    hostname: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    env_file:
+      - .env
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    env_file:
+      - ./bet-maker/.env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  bet-maker:
+    build:
+      context: ./bet-maker
+    env_file:
+      - .env
+      - ./bet-maker/.env
+    restart: on-failure
+    ports:
+      - "8001:8000"
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  line-provider:
+    build:
+      context: ./line-provider
+    env_file:
+      - .env
+    restart: on-failure
+    ports:
+      - "8002:8000"
+    depends_on:
+      - rabbitmq

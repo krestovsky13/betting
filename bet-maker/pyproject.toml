@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bet-maker"
+version = "0.1.0"
+description = "the service that accepts bets on these events from the user"
+authors = ["krestovsky13 <nikkres@mail.ru>"]
+readme = "README.md"
+packages = [{include = "bet_maker"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.104.0"
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+aio-pika = "^9.3.0"
+asyncpg = "^0.28.0"
+aiohttp = "^3.8.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

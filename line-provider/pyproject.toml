@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "line-provider"
+version = "0.1.0"
+description = "event information provider"
+authors = ["krestovsky13 <nikkres@mail.ru>"]
+readme = "README.md"
+packages = [{include = "line_provider"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.104.0"
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+pydantic-settings = "^2.0.3"
+aio-pika = "^9.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
