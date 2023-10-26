@@ -7,6 +7,6 @@
 
 #### Локальный запуск:
 ```
-git clone https://github.com/krestovsky13/webtronics
+git clone https://github.com/krestovsky13/betting
 make run или docker-compose up --build
 ```
